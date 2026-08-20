@@ -109,7 +109,7 @@ def evaluate_model_artifact(
             "f1_score": round(float(macro.get("f1-score", 0.0)), 4),
         },
         "confusion_matrix": cm,
-        "labels": [str(l) for l in labels],
+        "labels": [str(lbl) for lbl in labels],
     }
 
     os.makedirs(os.path.dirname(os.path.abspath(output_report_path)), exist_ok=True)

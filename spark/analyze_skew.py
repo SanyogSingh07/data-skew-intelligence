@@ -15,7 +15,7 @@ from pyspark.sql import DataFrame, SparkSession
 from pyspark.sql import functions as F
 
 from spark.config import get, resolve_path
-from spark.metrics import PartitionStats, get_partition_metrics, shuffle_partition_stats
+from spark.metrics import PartitionStats, shuffle_partition_stats
 
 
 @dataclass

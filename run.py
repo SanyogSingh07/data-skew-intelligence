@@ -37,6 +37,7 @@ for stream in (sys.stdout, sys.stderr):
             pass
 
 import warnings
+
 warnings.filterwarnings("ignore")
 
 from cli.menu import run_results_console

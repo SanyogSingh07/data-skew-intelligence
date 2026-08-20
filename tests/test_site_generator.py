@@ -1,5 +1,3 @@
-import shutil
-from pathlib import Path
 from visualization.site_generator import export_static_site, generate_html_content
 
 

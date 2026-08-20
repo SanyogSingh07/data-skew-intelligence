@@ -14,7 +14,6 @@ groupBy/shuffle.
 """
 from __future__ import annotations
 
-import os
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -93,7 +92,7 @@ def generate_dataset(
             "key": key_column,
             "value": values,
             "category": category_column,
-            "timestamp": timestamps,
+            "timestamp": pd.to_datetime(timestamps).floor("ms"),
         }
     )
 
@@ -104,7 +103,7 @@ def generate_dataset(
     output = resolve_path(output) if not isinstance(output, Path) else output
     output.parent.mkdir(parents=True, exist_ok=True)
 
-    df.to_parquet(output, index=False, engine="pyarrow")
+    df.to_parquet(output, index=False, engine="pyarrow", coerce_timestamps="ms")
 
     return GenerationResult(
         output_path=output,

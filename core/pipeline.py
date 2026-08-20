@@ -8,10 +8,9 @@ import subprocess
 import sys
 import time
 import traceback
-from pathlib import Path
-from typing import Any
-
 import warnings
+from pathlib import Path
+
 warnings.filterwarnings("ignore")
 
 from cli.console import (
@@ -23,7 +22,6 @@ from cli.console import (
     print_step,
 )
 from core.config import (
-    DEFAULT_NUM_KEYS,
     DEFAULT_NUM_PARTITIONS,
     DEFAULT_ROWS,
     DEFAULT_SEED,
@@ -36,10 +34,9 @@ from core.config import (
 from core.environment import check_environment
 from core.results import compare_results, save_run_results
 from ml.predict import features_from_baseline, predict_severity
-from ml.train import train_and_select, train_skew_classifiers
-from spark.analyze_skew import analyze, key_frequency_stats
+from ml.train import train_and_select
+from spark.analyze_skew import analyze
 from spark.baseline import run_baseline
-from spark.config import get, resolve_path
 from spark.generate_data import generate_dataset
 from spark.mitigation import run_mitigation
 from spark.session import get_spark_session, stop_spark_session
@@ -66,7 +63,7 @@ def setup_logger() -> tuple[logging.Logger, Path]:
 
 def clean_project_artifacts() -> None:
     """Removes generated datasets, temporary spark warehouse, results, and logs."""
-    from core.config import GENERATED_DATA_DIR, LOGS_DIR, RESULTS_DIR
+    from core.config import GENERATED_DATA_DIR, LOGS_DIR
     for target_dir in [GENERATED_DATA_DIR, RESULTS_DIR, LOGS_DIR]:
         if target_dir.exists():
             shutil.rmtree(target_dir, ignore_errors=True)

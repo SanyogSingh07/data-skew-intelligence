@@ -31,7 +31,6 @@ def generate_html_content(summary: Dict[str, Any], profile: Dict[str, Any], base
     
     base_time = summary.get("baseline_execution_time", summary.get("before", {}).get("execution_time_sec", 0.0))
     mit_time = summary.get("mitigated_execution_time", summary.get("after", {}).get("execution_time_sec", 0.0))
-    improvement = summary.get("improvement_pct", 0.0)
 
     base_max = baseline.get("max_partition_size", baseline.get("max_partition_records", 0))
     mit_max = mitigated.get("max_partition_size", mitigated.get("max_partition_records", 0))

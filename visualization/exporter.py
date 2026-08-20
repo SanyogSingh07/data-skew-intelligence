@@ -6,7 +6,6 @@ and generates/validates high-resolution PNG charts under results/<timestamp>/cha
 from __future__ import annotations
 
 import csv
-import json
 import logging
 from pathlib import Path
 from typing import Any, Dict, List, Optional

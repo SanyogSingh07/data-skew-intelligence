@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any, Dict, List
 
 import matplotlib
+
 matplotlib.use("Agg")  # Non-interactive background rendering
 import matplotlib.pyplot as plt
 import numpy as np
@@ -20,8 +21,6 @@ from visualization.theme import (
     GREEN_2,
     GRID,
     MUTED,
-    SURFACE,
-    SURFACE_2,
     TEXT,
     WARNING,
     apply_matplotlib_theme,
@@ -108,7 +107,7 @@ def plot_partition_distribution(partition_sizes: List[int], output_path: str | P
     ax.axhline(max_val, color=ERROR, linestyle="-.", linewidth=1.2, label=f"Max: {max_val:,}")
 
     # Annotate bars
-    for idx, (bar, size) in enumerate(zip(bars, sizes)):
+    for bar, size in zip(bars, sizes):
         ax.text(
             bar.get_x() + bar.get_width() / 2,
             bar.get_height() + (max_val * 0.02),
@@ -247,8 +246,6 @@ def plot_performance_comparison(metrics: Dict[str, Any], output_path: str | Path
     m_rt = metrics.get("mitigated_execution_time", 0.0)
     b_max = metrics.get("baseline_max_partition_records", 0)
     m_max = metrics.get("mitigated_max_partition_records", 0)
-    b_std = metrics.get("baseline_partition_std", 0.0)
-    m_std = metrics.get("mitigated_partition_std", 0.0)
 
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 6), dpi=120)
 

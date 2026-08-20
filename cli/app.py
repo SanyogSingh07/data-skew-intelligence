@@ -32,8 +32,8 @@ if _VENV_SITE.exists() and str(_VENV_SITE) not in sys.path:
 # Reconfigure stdout/stderr to UTF-8 for Windows console compatibility
 if hasattr(sys.stdout, "reconfigure"):
     try:
-        getattr(sys.stdout, "reconfigure")(encoding="utf-8", errors="replace")
-        getattr(sys.stderr, "reconfigure")(encoding="utf-8", errors="replace")
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
     except Exception:
         pass
 

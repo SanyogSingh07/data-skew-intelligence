@@ -12,7 +12,6 @@ Two families of metrics live here:
 from __future__ import annotations
 
 import json
-import math
 import statistics
 import time
 import urllib.error

@@ -6,23 +6,21 @@ dataset profile, Spark metrics, before/after comparison, ML results, and graph v
 from __future__ import annotations
 
 import json
-import sys
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 from rich.console import Console
 from rich.panel import Panel
 from rich.prompt import Prompt
 from rich.table import Table
 
-from core.config import EXPERIMENTS_RESULTS_DIR, LATEST_RESULTS_DIR, RESULTS_DIR
+from core.config import EXPERIMENTS_RESULTS_DIR, LATEST_RESULTS_DIR
 from visualization.tables import (
-    get_banner_panel,
     get_history_table,
     get_ml_results_table,
     get_summary_table,
 )
-from visualization.theme import ERROR, GREEN, GREEN_2, MUTED, SURFACE, TEXT, WARNING
+from visualization.theme import ERROR, GREEN, GREEN_2, MUTED, TEXT, WARNING
 
 console = Console()
 

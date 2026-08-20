@@ -3,7 +3,7 @@
   "rows": 10000,
   "input_partitions": 1,
   "result_partitions": 8,
-  "execution_time_sec": 0.2687,
+  "execution_time_sec": 0.142,
   "max_partition_size": 7394,
   "min_partition_size": 283,
   "mean_partition_size": 1250.0,

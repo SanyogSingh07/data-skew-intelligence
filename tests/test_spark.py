@@ -1,4 +1,5 @@
 import pytest
+
 from spark.baseline import run_baseline_aggregation
 from spark.generate_data import generate_skewed_dataset
 from spark.session import get_spark_session

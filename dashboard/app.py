@@ -19,7 +19,7 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from spark.config import get, resolve_path
-from visualization.theme import BACKGROUND, ERROR, GREEN, GREEN_2, GRID, MUTED, SURFACE, SURFACE_2, TEXT, WARNING
+from visualization.theme import BACKGROUND, GREEN, GREEN_2, MUTED, SURFACE, SURFACE_2, TEXT, WARNING
 
 st.set_page_config(page_title="Data Skew Intelligence", page_icon="⚡", layout="wide")
 

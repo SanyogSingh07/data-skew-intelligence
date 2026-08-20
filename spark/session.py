@@ -69,10 +69,10 @@ def _init_spark_env():
 
 _init_spark_env()
 
+import contextlib
+
 from pyspark.sql import SparkSession
 
-
-import contextlib
 
 @contextlib.contextmanager
 def _silence_stderr_fd():
@@ -141,6 +141,11 @@ def get_spark_session(
         .config("spark.ui.port", "4040")
         .config("spark.ui.showConsoleProgress", "false")
         .config("spark.hadoop.native.lib", "false")
+        .config("spark.sql.parquet.datetimeRebaseModeInRead", "CORRECTED")
+        .config("spark.sql.parquet.datetimeRebaseModeInWrite", "CORRECTED")
+        .config("spark.sql.parquet.int96RebaseModeInRead", "CORRECTED")
+        .config("spark.sql.parquet.int96RebaseModeInWrite", "CORRECTED")
+        .config("spark.sql.parquet.nanosAsLong", "true")
     )
 
     active = SparkSession.getActiveSession()
