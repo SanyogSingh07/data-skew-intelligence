@@ -1,0 +1,33 @@
+{
+  "distinct_keys": 200,
+  "total_rows": 10000,
+  "mean_frequency": 50.0,
+  "median_frequency": 15.0,
+  "std_frequency": 492.6888673392164,
+  "max_frequency": 7000,
+  "min_frequency": 4,
+  "top1_concentration": 0.7,
+  "top5_concentration": 0.7099,
+  "top_keys": {
+    "KEY_00000": 7000,
+    "KEY_00170": 26,
+    "KEY_00064": 25,
+    "KEY_00187": 24,
+    "KEY_00192": 24,
+    "KEY_00147": 23,
+    "KEY_00111": 23,
+    "KEY_00130": 23,
+    "KEY_00127": 23,
+    "KEY_00019": 22,
+    "KEY_00058": 22,
+    "KEY_00009": 22,
+    "KEY_00031": 22,
+    "KEY_00049": 22,
+    "KEY_00026": 22,
+    "KEY_00106": 21,
+    "KEY_00033": 21,
+    "KEY_00144": 21,
+    "KEY_00061": 21,
+    "KEY_00091": 21
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "experiment_id": "EXP-1787227766",
+  "status": "success",
+  "rows": 10000,
+  "skew_ratio": 0.7,
+  "severity": "HIGH_SKEW",
+  "model": "logistic_regression",
+  "mitigation": "SALTING",
+  "timestamp": "2026-08-20 17:41:01"
+}

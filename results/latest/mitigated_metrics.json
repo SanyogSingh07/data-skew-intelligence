@@ -1,0 +1,25 @@
+{
+  "dataset": "skew_70.parquet",
+  "method": "SALTING",
+  "rows": 10000,
+  "execution_time_sec": 1.1879,
+  "result_partitions": 8,
+  "max_partition_size": 2090,
+  "min_partition_size": 420,
+  "mean_partition_size": 1250.0,
+  "partition_std": 419.5879,
+  "skew_ratio": 1.672,
+  "coefficient_of_variation": 0.3357,
+  "shuffle_read_bytes": 271055,
+  "shuffle_write_bytes": 0,
+  "partition_sizes": [
+    1226,
+    1212,
+    1246,
+    2090,
+    1280,
+    420,
+    1336,
+    1190
+  ]
+}

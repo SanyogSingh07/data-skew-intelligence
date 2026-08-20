@@ -1,0 +1,47 @@
+project:
+  name: "Data Skew Intelligence"
+  id: "23BTRDC034"
+
+spark:
+  master: "local[*]"
+  shuffle_partitions: 8
+  adaptive_query_execution: false
+  app_name: "data-skew-intelligence"
+
+experiment:
+  rows: 100000
+  seed: 42
+  skew_levels: [0.10, 0.30, 0.50, 0.70, 0.90]
+  categories: ["A", "B", "C", "D", "E"]
+  num_keys: 200
+
+skew_score:
+  # Weights for the composite SkewScore = w1*skew_ratio_norm + w2*variance_norm + w3*top1_concentration
+  w1: 0.4
+  w2: 0.3
+  w3: 0.3
+  # Normalization caps used to bound skew_ratio and coefficient-of-variation
+  # into [0, 1]. CV (std/mean of partition sizes) is scale-invariant, unlike
+  # raw variance, so it stays meaningful across dataset sizes.
+  skew_ratio_cap: 10.0
+  cv_cap: 1.5
+  thresholds:
+    normal_max: 0.30
+    low_skew_max: 0.60
+    # anything above low_skew_max is HIGH_SKEW
+
+mitigation:
+  salt_buckets: 8
+
+ml:
+  test_size: 0.20
+  random_state: 42
+  cv_folds: 5
+
+paths:
+  data_generated: "data/generated"
+  results_experiments: "results/experiments"
+  results_metrics: "results/metrics"
+  results_models: "results/models"
+  results_reports: "results/reports"
+  experiment_dataset: "results/metrics/experiment_dataset.csv"

@@ -1,0 +1,65 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+.ruff_cache/
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+.gemini/
+.agents/
+
+# Scratch & Temporary Archives
+scratch/
+hs_err_*.log
+*.zip
+
+# Spark & Telemetry
+spark-warehouse/
+metastore_db/
+*.crc
+
+# Logs
+*.log
+logs/
+
+# Data & Experiments
+data/raw/*
+data/skewed/*
+data/generated/*
+!data/**/.gitkeep
+results/experiments/*
+!results/experiments/.gitkeep
+results/metrics/*
+!results/metrics/.gitkeep
+results/models/*
+!results/models/.gitkeep
+results/reports/*
+!results/reports/.gitkeep
+results/tmp/
+checkpoints/
+
+# Timestamped results directories (keep only latest)
+results/2026-*
+
+# Parquet / CSV
+*.parquet
+*.csv
+
+# Static Web Export
+site/
+
+# Docs screenshots are tracked (NOT ignored)
+!docs/screenshots/
+
+# Type checking config (editor-specific)
+pyrefly.toml
+pyrightconfig.json
+

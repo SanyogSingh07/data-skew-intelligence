@@ -1,0 +1,10 @@
+services:
+  app:
+    build: .
+    container_name: data_skew_intelligence
+    ports:
+      - "8501:8501"
+      - "4040:4040"
+    volumes:
+      - .:/app
+    command: python -m streamlit run dashboard/app.py --server.port=8501 --server.address=0.0.0.0

@@ -1,0 +1,26 @@
+{
+  "experiment_id": "EXP-1787227766",
+  "rows": 10000,
+  "skew": 0.7,
+  "skew_ratio": 0.7,
+  "partitions": 8,
+  "predicted_class": "HIGH_SKEW",
+  "ml_model": "logistic_regression",
+  "mitigation": "SALTING",
+  "mitigation_strategy": "SALTING",
+  "baseline_execution_time": 0.2687,
+  "mitigated_execution_time": 1.1879,
+  "improvement_pct": -342.09,
+  "before": {
+    "execution_time_sec": 0.2687,
+    "max_partition_size": 7394,
+    "partition_std": 2322.6937
+  },
+  "after": {
+    "execution_time_sec": 1.1879,
+    "max_partition_size": 2090,
+    "partition_std": 419.5879
+  },
+  "tests_passed": 6,
+  "timestamp": "2026-08-20 17:41:01"
+}
