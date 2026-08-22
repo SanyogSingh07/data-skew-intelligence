@@ -1,5 +1,5 @@
 {
-  "experiment_id": "EXP-1787397300",
+  "experiment_id": "EXP-1787397872",
   "rows": 10000,
   "skew": 0.7,
   "skew_ratio": 0.7,
@@ -8,19 +8,19 @@
   "ml_model": "logistic_regression",
   "mitigation": "SALTING",
   "mitigation_strategy": "SALTING",
-  "baseline_execution_time": 0.0949,
-  "mitigated_execution_time": 0.2135,
-  "improvement_pct": -124.97,
+  "baseline_execution_time": 0.1293,
+  "mitigated_execution_time": 0.2499,
+  "improvement_pct": -93.27,
   "before": {
-    "execution_time_sec": 0.0949,
+    "execution_time_sec": 0.1293,
     "max_partition_size": 7394,
     "partition_std": 2322.6937
   },
   "after": {
-    "execution_time_sec": 0.2135,
-    "max_partition_size": 2066,
-    "partition_std": 419.4136
+    "execution_time_sec": 0.2499,
+    "max_partition_size": 2105,
+    "partition_std": 429.8322
   },
   "tests_passed": 6,
-  "timestamp": "2026-08-22 16:45:01"
+  "timestamp": "2026-08-22 16:54:33"
 }

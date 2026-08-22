@@ -1,83 +1,335 @@
 # Data Skew Intelligence
 
-### Intelligent Detection, Analysis, Classification, and Mitigation of Data Skew in Apache Spark
+### An Intelligent Apache Spark System for Detecting, Explaining, Classifying, and Mitigating Data Skew
 
-[![GitHub Stars](https://img.shields.io/github/stars/SanyogSingh07/data-skew-intelligence?style=for-the-badge&logo=github&label=Stars)](https://github.com/SanyogSingh07/data-skew-intelligence)
-[![GitHub Forks](https://img.shields.io/github/forks/SanyogSingh07/data-skew-intelligence?style=for-the-badge&logo=github&label=Forks)](https://github.com/SanyogSingh07/data-skew-intelligence/network/members)
-[![GitHub Issues](https://img.shields.io/github/issues/SanyogSingh07/data-skew-intelligence?style=for-the-badge&logo=github&label=Issues)](https://github.com/SanyogSingh07/data-skew-intelligence/issues)
-[![CI Status](https://img.shields.io/github/actions/workflow/status/SanyogSingh07/data-skew-intelligence/ci.yml?style=for-the-badge&logo=github-actions&label=CI)](https://github.com/SanyogSingh07/data-skew-intelligence/actions)
-[![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![Apache Spark](https://img.shields.io/badge/Apache%20Spark-PySpark-E25A1C?style=for-the-badge&logo=apachespark&logoColor=white)](https://spark.apache.org/)
-[![scikit-learn](https://img.shields.io/badge/scikit--learn-ML-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)](https://scikit-learn.org/)
-[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
-[![License](https://img.shields.io/github/license/SanyogSingh07/data-skew-intelligence?style=for-the-badge&label=License)](https://github.com/SanyogSingh07/data-skew-intelligence/blob/main/LICENSE)
+<p align="center">
+  <a href="https://github.com/SanyogSingh07/data-skew-intelligence">
+    <img src="https://img.shields.io/github/stars/SanyogSingh07/data-skew-intelligence?style=for-the-badge&logo=github&label=Stars" alt="GitHub Stars">
+  </a>
+  <a href="https://github.com/SanyogSingh07/data-skew-intelligence/network/members">
+    <img src="https://img.shields.io/github/forks/SanyogSingh07/data-skew-intelligence?style=for-the-badge&logo=github&label=Forks" alt="GitHub Forks">
+  </a>
+  <a href="https://github.com/SanyogSingh07/data-skew-intelligence/actions">
+    <img src="https://img.shields.io/github/actions/workflow/status/SanyogSingh07/data-skew-intelligence/ci.yml?style=for-the-badge&logo=github-actions&label=CI" alt="CI">
+  </a>
+  <a href="https://github.com/SanyogSingh07/data-skew-intelligence/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/SanyogSingh07/data-skew-intelligence?style=for-the-badge&label=License" alt="License">
+  </a>
+  <img src="https://img.shields.io/badge/Python-3.11%2B-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/Apache%20Spark-PySpark-E25A1C?style=for-the-badge&logo=apachespark&logoColor=white" alt="Apache Spark">
+  <img src="https://img.shields.io/badge/scikit--learn-ML-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white" alt="scikit-learn">
+  <img src="https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker">
+</p>
 
-[**Live Benchmark**](https://sanyogsingh07.github.io/data-skew-intelligence/) • [**Source Code**](https://github.com/SanyogSingh07/data-skew-intelligence) • [**CI / CD**](https://github.com/SanyogSingh07/data-skew-intelligence/actions) • [**Documentation**](https://github.com/SanyogSingh07/data-skew-intelligence/tree/main/docs)
+<p align="center">
+  <a href="https://sanyogsingh07.github.io/data-skew-intelligence/">
+    <strong>Open Live Benchmark</strong>
+  </a>
+  &nbsp;&nbsp;•&nbsp;&nbsp;
+  <a href="https://github.com/SanyogSingh07/data-skew-intelligence">
+    <strong>Explore Source</strong>
+  </a>
+  &nbsp;&nbsp;•&nbsp;&nbsp;
+  <a href="https://github.com/SanyogSingh07/data-skew-intelligence/actions">
+    <strong>Build & Deploy</strong>
+  </a>
+</p>
 
 ---
 
-## Project at a Glance
+## About the Project
 
-**Data Skew Intelligence** is an experimental data engineering platform built around a practical distributed-systems problem: the effect of uneven key distributions on Apache Spark execution.
+Distributed systems are designed to divide work. Data skew is one of the clearest ways that apparently parallel work can become uneven again.
 
-The project intentionally creates controlled key skew, observes how that skew propagates into Spark partition imbalance, measures the resulting execution behaviour, transforms telemetry into machine-learning features, classifies skew severity, recommends a mitigation strategy, applies the mitigation, and validates the result.
+When a small number of keys account for a disproportionate share of records, Spark can produce highly imbalanced partitions. Some tasks finish quickly, while one or more overloaded tasks become stragglers. The result can be poor parallelism, uneven executor utilization, greater shuffle pressure, and unpredictable execution behaviour.
 
-The complete system can be viewed as:
+**Data Skew Intelligence** was built to make that problem visible and measurable.
+
+The project creates controlled skewed datasets, profiles the distribution, executes a Spark workload, captures partition and shuffle telemetry, quantifies imbalance statistically, converts the observations into machine-learning features, classifies the severity of skew, selects an appropriate mitigation strategy, executes the mitigation, and validates the result.
+
+It is therefore not just a demonstration of salting.
+
+It is a complete experimental loop:
 
 ```text
-Controlled Data Distribution
-            ↓
-      Dataset Profiling
-            ↓
-      Spark Baseline Run
-            ↓
-   Partition / Shuffle Telemetry
-            ↓
-     Statistical Skew Analysis
-            ↓
-      ML Feature Engineering
-            ↓
-      Severity Classification
-            ↓
-   Mitigation Recommendation
-            ↓
-   Repartitioning / Salting
-            ↓
-     Post-Mitigation Tests
-            ↓
-      Benchmark & Reporting
-            ↓
- CLI / Streamlit / GitHub Pages
+Generate
+   ↓
+Profile
+   ↓
+Measure
+   ↓
+Explain
+   ↓
+Classify
+   ↓
+Recommend
+   ↓
+Mitigate
+   ↓
+Validate
+   ↓
+Report
 ```
 
-The repository is deliberately designed as more than a single Spark script. It combines data generation, distributed execution, observability, statistical analysis, machine learning, optimization, validation, visualization, containerization, testing, and CI/CD into one reproducible project.
+The system brings together **data engineering, distributed systems, statistical analysis, machine learning, observability, optimization, visualization, testing, and deployment** in one reproducible repository.
 
 ---
 
-## Live Project
+## The Project in One View
 
-### Public Benchmark Dashboard
+<table>
+<tr>
+<td width="50%">
 
-[![Open Live Benchmark](https://img.shields.io/badge/OPEN%20LIVE%20BENCHMARK-GitHub%20Pages-111111?style=for-the-badge&logo=githubpages&logoColor=white)](https://sanyogsingh07.github.io/data-skew-intelligence/)
+### The Problem
 
-**Live URL:**  
-https://sanyogsingh07.github.io/data-skew-intelligence/
+A dominant key can turn a logically parallel Spark workload into a physically uneven execution plan.
 
-The GitHub Pages deployment is generated from the project's benchmark artifacts rather than being a manually written marketing page. It exposes the experiment results in a form that can be reviewed without installing Java, Spark, Python, or Docker.
+```text
+Hot Key
+  ↓
+Large Shuffle Group
+  ↓
+Large Partition
+  ↓
+Straggler
+  ↓
+Uneven Workload
+  ↓
+Poorer Scalability
+```
 
-The current release report includes:
+</td>
+<td width="50%">
 
-- Baseline and mitigated execution metrics
+### The Response
+
+The system observes the workload and builds evidence before applying a mitigation.
+
+```text
+Telemetry
+   ↓
+Metrics
+   ↓
+ML Classification
+   ↓
+Mitigation
+   ↓
+Validation
+```
+
+</td>
+</tr>
+</table>
+
+---
+
+## The Live Demo, Inside the README
+
+GitHub repository pages do not allow a README to safely render an arbitrary interactive iframe from an external website. For that reason, the correct approach is to put the **actual project output directly on the README page** and make the preview itself open the live application.
+
+### Click the benchmark preview to open the live project
+
+<p align="center">
+  <a href="https://sanyogsingh07.github.io/data-skew-intelligence/">
+    <img src="docs/screenshots/before_after_partition.png"
+         alt="Data Skew Intelligence live benchmark preview"
+         width="900">
+  </a>
+</p>
+
+<p align="center">
+  <strong>Interactive benchmark:</strong>
+  <a href="https://sanyogsingh07.github.io/data-skew-intelligence/">
+    sanyogsingh07.github.io/data-skew-intelligence
+  </a>
+</p>
+
+The page above is not a decorative screenshot. It represents the same benchmark/reporting workflow produced by the repository and deployed through GitHub Pages.
+
+The live report currently exposes:
+
+- Baseline versus mitigated execution metrics
 - Maximum partition load
 - Partition-load standard deviation
 - Top-key concentration
-- Before/after partition visualizations
-- Skew versus runtime analysis
+- Partition visualizations
+- Skew-versus-runtime analysis
 - Performance comparison
 - Telemetry summary
-- Validation status
+- Exported CSV and JSON artifacts
 
-This makes the live deployment an extension of the repository itself: the source code runs the experiment, the reporting layer exports the results, and GitHub Pages exposes those results publicly.
+**This is the primary project demonstration.**
+
+---
+
+## Evidence Before Explanation
+
+The repository already contains eight visual assets. They should remain part of the README because they explain the system faster than paragraphs of implementation detail.
+
+### 01 — Key Distribution
+
+<a href="https://sanyogsingh07.github.io/data-skew-intelligence/">
+  <img src="docs/screenshots/key_distribution.png" alt="Key distribution and hot-key concentration" width="900">
+</a>
+
+The first question is not "How do we mitigate the problem?"
+
+It is:
+
+> Where is the concentration coming from?
+
+This visualization establishes the logical source of the skew.
+
+---
+
+### 02 — Physical Partition Distribution
+
+<a href="https://sanyogsingh07.github.io/data-skew-intelligence/">
+  <img src="docs/screenshots/partition_distribution.png" alt="Physical Spark partition distribution" width="900">
+</a>
+
+The second question is:
+
+> How does the logical concentration manifest physically inside Spark?
+
+This is where data distribution becomes a distributed execution problem.
+
+---
+
+### 03 — Before and After Partition Balance
+
+<a href="https://sanyogsingh07.github.io/data-skew-intelligence/">
+  <img src="docs/screenshots/before_after_partition.png" alt="Before and after partition balance after mitigation" width="900">
+</a>
+
+This is the most important mitigation visual.
+
+It shows whether the optimization actually changed the distribution of work across partitions.
+
+---
+
+### 04 — Runtime Behaviour Across Skew Levels
+
+<a href="https://sanyogsingh07.github.io/data-skew-intelligence/">
+  <img src="docs/screenshots/skew_vs_runtime.png" alt="Skew percentage versus execution runtime" width="900">
+</a>
+
+This experiment studies how increasing key concentration changes observed execution behaviour.
+
+---
+
+### 05 — Overall Performance Comparison
+
+<a href="https://sanyogsingh07.github.io/data-skew-intelligence/">
+  <img src="docs/screenshots/performance_comparison.png" alt="Overall baseline versus mitigated performance comparison" width="900">
+</a>
+
+This provides the consolidated benchmark view across the principal execution metrics.
+
+---
+
+### 06 — Skew Versus Partition Variability
+
+<a href="https://sanyogsingh07.github.io/data-skew-intelligence/">
+  <img src="docs/screenshots/skew_vs_partition_cv.png" alt="Skew percentage versus partition coefficient of variation" width="900">
+</a>
+
+This connects logical skew intensity with physical partition-load variability.
+
+---
+
+### 07 — Pipeline Execution
+
+<img src="docs/screenshots/terminal_pipeline.jpg" alt="Data Skew Intelligence terminal pipeline execution" width="900">
+
+The terminal view demonstrates that the system is not just a visual dashboard. The complete experiment can be executed from the CLI.
+
+---
+
+### 08 — Results Console
+
+<img src="docs/screenshots/terminal_menu.jpg" alt="Data Skew Intelligence terminal results console" width="900">
+
+The Rich results console provides a structured way to inspect experiments without opening the web dashboard.
+
+---
+
+## What Makes This Different
+
+The important part of this project is not any single technology.
+
+Spark can repartition.
+
+Spark can salt keys.
+
+scikit-learn can train a classifier.
+
+Streamlit can display a chart.
+
+The engineering value comes from connecting those components into one decision system.
+
+```text
+Data Distribution
+        ↓
+Spark Execution
+        ↓
+Telemetry Collection
+        ↓
+Statistical Analysis
+        ↓
+Feature Engineering
+        ↓
+ML Severity Classification
+        ↓
+Mitigation Recommendation
+        ↓
+Repartition / Salting
+        ↓
+Post-Mitigation Validation
+        ↓
+Benchmark Reporting
+```
+
+The ML component is therefore not an isolated model-training exercise. It sits between observability and an operational decision.
+
+---
+
+## Current Benchmark Snapshot
+
+The public GitHub Pages release currently reports:
+
+| Metric | Baseline | Mitigated |
+|---|---:|---:|
+| Execution time | 0.34 s | 0.42 s |
+| Maximum partition load | 7,394 | 2,132 |
+| Partition-load standard deviation | 2,322.69 | 437.26 |
+| Aggregation correctness | Validated | Validated |
+
+The maximum partition load is reduced by approximately **71.2%**, while partition-load standard deviation falls by approximately **81.2%**.
+
+The runtime result should be interpreted in context. The current benchmark is a small local experiment, and salting adds computation and aggregation overhead. The stronger evidence is the substantial reduction in partition concentration while preserving logical correctness.
+
+Source: current public benchmark report.  
+https://sanyogsingh07.github.io/data-skew-intelligence/
+
+---
+
+## Technical Positioning
+
+This repository sits at the intersection of:
+
+| Area | What the project demonstrates |
+|---|---|
+| Data Engineering | Spark, Parquet, partitioning, shuffle, aggregation |
+| Distributed Systems | Skew, stragglers, workload imbalance, mitigation |
+| Machine Learning | Feature engineering, classification, model comparison |
+| Data Analysis | Distribution analysis, concentration, CV, skew metrics |
+| MLOps / Engineering | Experiment orchestration, persistence, validation |
+| Visualization | Matplotlib, Plotly, static reporting |
+| Developer Tooling | Typer, Rich, automated CLI workflows |
+| Deployment | Docker, GitHub Actions, GitHub Pages |
+| Quality Engineering | Pytest, coverage, smoke testing |
 
 ---
 
@@ -2111,9 +2363,18 @@ Focus areas:
 
 `Data Science` · `Machine Learning` · `Data Engineering` · `Artificial Intelligence` · `Big Data Analytics`
 
-[GitHub](https://github.com/SanyogSingh07) • [LinkedIn](https://www.linkedin.com/in/sanyog-singh/) • [Live Benchmark](https://sanyogsingh07.github.io/data-skew-intelligence/)
+<p align="center">
+  <a href="https://github.com/SanyogSingh07">GitHub</a>
+  &nbsp;&nbsp;•&nbsp;&nbsp;
+  <a href="https://www.linkedin.com/in/sanyog-singh/">LinkedIn</a>
+  &nbsp;&nbsp;•&nbsp;&nbsp;
+  <a href="https://sanyogsingh07.github.io/data-skew-intelligence/">Live Benchmark</a>
+</p>
 
 ---
 
-**Data distribution is a systems problem.**  
-*This project makes that problem measurable, explainable, and actionable.*
+<p align="center">
+  <strong>Data distribution is a systems problem.</strong>
+  <br>
+  <sub>This project makes that problem measurable, explainable, and actionable.</sub>
+</p>

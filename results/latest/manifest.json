@@ -1,10 +1,10 @@
 {
-  "experiment_id": "EXP-1787397300",
+  "experiment_id": "EXP-1787397872",
   "status": "success",
   "rows": 10000,
   "skew_ratio": 0.7,
   "severity": "HIGH_SKEW",
   "model": "logistic_regression",
   "mitigation": "SALTING",
-  "timestamp": "2026-08-22 16:45:01"
+  "timestamp": "2026-08-22 16:54:33"
 }
