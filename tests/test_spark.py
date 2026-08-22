@@ -1,14 +1,5 @@
-import pytest
-
 from spark.baseline import run_baseline_aggregation
 from spark.generate_data import generate_skewed_dataset
-from spark.session import get_spark_session
-
-
-@pytest.fixture(scope="module")
-def spark():
-    session = get_spark_session(app_name="TestSparkSuite")
-    yield session
 
 
 def test_spark_session_creation(spark):

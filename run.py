@@ -105,6 +105,11 @@ Examples:
         action="store_true",
         help="Generate standalone static HTML/CSS/JS web dashboard for GitHub Pages hosting"
     )
+    parser.add_argument(
+        "--test",
+        action="store_true",
+        help="Run full automated Pytest test suite during pipeline execution"
+    )
 
     args = parser.parse_args()
 
@@ -114,14 +119,14 @@ Examples:
         sys.exit(0)
 
     # Standalone site export mode (if requested independently)
-    if args.export_site and not (args.quick or args.clean or args.setup):
+    if args.export_site and not (args.quick or args.clean or args.setup or args.test):
         from visualization.site_generator import export_static_site
         site_dir = export_static_site()
         print(f"✓ Static site successfully generated at: {site_dir}")
         sys.exit(0)
 
     # Default execution: run quick pipeline if no specific mode selected
-    is_default = not (args.check or args.quick or args.clean or args.dashboard or args.setup or args.export_site)
+    is_default = not (args.check or args.quick or args.clean or args.dashboard or args.setup or args.export_site or args.test)
     if is_default:
         args.quick = True
 
@@ -134,6 +139,7 @@ Examples:
             setup=args.setup,
             verbose=args.verbose,
             export_site=args.export_site,
+            run_tests=args.test,
         )
 
         if exit_code != 0 or args.no_menu or args.check or args.setup or args.dashboard:

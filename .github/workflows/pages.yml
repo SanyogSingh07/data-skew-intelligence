@@ -43,10 +43,15 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run quick benchmark & export static site
+        env:
+          SPARK_LOCAL_IP: "127.0.0.1"
+          _JAVA_OPTIONS: "-XX:+UseParallelGC -Xmx2g -Dspark.ui.enabled=false"
         run: python run.py --quick --no-menu --export-site
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

@@ -77,7 +77,7 @@ def _candidate_models() -> dict[str, Pipeline]:
             [("clf", DecisionTreeClassifier(max_depth=6, random_state=random_state))]
         ),
         "random_forest": Pipeline(
-            [("clf", RandomForestClassifier(n_estimators=200, max_depth=10, random_state=random_state))]
+            [("clf", RandomForestClassifier(n_estimators=100, max_depth=8, random_state=random_state, n_jobs=-1))]
         ),
     }
 
@@ -189,9 +189,9 @@ def train_skew_classifiers(
     )
 
     models = {
-        "logistic_regression": Pipeline([("scaler", StandardScaler()), ("clf", LogisticRegression(max_iter=1000, random_state=random_state))]),
+        "logistic_regression": Pipeline([("scaler", StandardScaler()), ("clf", LogisticRegression(max_iter=500, random_state=random_state))]),
         "decision_tree": Pipeline([("clf", DecisionTreeClassifier(max_depth=6, random_state=random_state))]),
-        "random_forest": Pipeline([("clf", RandomForestClassifier(n_estimators=200, max_depth=10, random_state=random_state))]),
+        "random_forest": Pipeline([("clf", RandomForestClassifier(n_estimators=100, max_depth=8, random_state=random_state, n_jobs=-1))]),
     }
 
     results = {}

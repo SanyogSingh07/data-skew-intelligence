@@ -62,35 +62,39 @@ def build_feature_dataset(
     repeats: int = 3,
     spark: SparkSession | None = None,
     save: bool = True,
+    empirical: bool = False,
 ) -> pd.DataFrame:
-    """Generate datasets across skew levels, benchmark each, and assemble
+    """Generate or synthesize training datasets across skew levels and assemble
     the experiment feature table.
     """
-    skew_levels = skew_levels or get("experiment", "skew_levels", default=[0.10, 0.30, 0.50, 0.70, 0.90])
-    rows_per_run = rows_per_run or get("experiment", "rows", default=50_000)
+    if not empirical:
+        df = generate_synthetic_training_dataset(n_samples=300, seed=42)
+    else:
+        skew_levels = skew_levels or get("experiment", "skew_levels", default=[0.10, 0.30, 0.50, 0.70, 0.90])
+        rows_per_run = rows_per_run or get("experiment", "rows", default=50_000)
 
-    active_before = SparkSession.getActiveSession() is not None
-    owns_session = (spark is None) and (not active_before)
-    spark = spark or get_spark_session()
+        active_before = SparkSession.getActiveSession() is not None
+        owns_session = (spark is None) and (not active_before)
+        spark = spark or get_spark_session()
 
-    records = []
-    try:
-        for level in skew_levels:
-            for i in range(repeats):
-                gen = generate_dataset(
-                    rows=rows_per_run,
-                    skew=level,
-                    seed=get("experiment", "seed", default=42) + i,
-                    output=resolve_path("data/generated") / f"train_skew_{int(level*100)}_{i}.parquet",
-                )
-                row = _row_for_dataset(spark, gen.output_path)
-                row["skew_level"] = level
-                records.append(row)
-    finally:
-        if owns_session:
-            stop_spark_session(spark)
+        records = []
+        try:
+            for level in skew_levels:
+                for i in range(repeats):
+                    gen = generate_dataset(
+                        rows=rows_per_run,
+                        skew=level,
+                        seed=get("experiment", "seed", default=42) + i,
+                        output=resolve_path("data/generated") / f"train_skew_{int(level*100)}_{i}.parquet",
+                    )
+                    row = _row_for_dataset(spark, gen.output_path)
+                    row["skew_level"] = level
+                    records.append(row)
+        finally:
+            if owns_session:
+                stop_spark_session(spark)
 
-    df = pd.DataFrame(records)
+        df = pd.DataFrame(records)
 
     if save:
         out_path = resolve_path(get("paths", "experiment_dataset", default="results/metrics/experiment_dataset.csv"))

@@ -42,8 +42,14 @@ jobs:
         run: ruff check .
 
       - name: Run Pytest suite with coverage
+        env:
+          SPARK_LOCAL_IP: "127.0.0.1"
+          _JAVA_OPTIONS: "-XX:+UseParallelGC -Xmx2g -Dspark.ui.enabled=false"
         run: pytest -q --cov=. --cov-report=term-missing
 
       - name: Quick Pipeline Smoke Test & Site Export
+        env:
+          SPARK_LOCAL_IP: "127.0.0.1"
+          _JAVA_OPTIONS: "-XX:+UseParallelGC -Xmx2g -Dspark.ui.enabled=false"
         run: python run.py --quick --no-menu --export-site
 

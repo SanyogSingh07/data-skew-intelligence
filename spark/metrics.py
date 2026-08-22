@@ -54,17 +54,29 @@ class PartitionStats:
         }
 
 
-def partition_stats(df: DataFrame) -> PartitionStats:
-    """Compute per-partition row counts for a DataFrame's current physical layout."""
-    sizes = df.rdd.glom().map(len).collect()
-    if not sizes:
-        sizes = [0]
+from pyspark.sql import functions as F
+
+
+def partition_stats(df: DataFrame, num_partitions: int | None = None) -> PartitionStats:
+    """Compute per-partition row counts using fast JVM-native spark_partition_id."""
+    try:
+        pid_counts = df.groupBy(F.spark_partition_id().alias("pid")).count().collect()
+        counts_dict = {row["pid"]: row["count"] for row in pid_counts}
+        total_parts = num_partitions if num_partitions is not None else (max(counts_dict.keys()) + 1 if counts_dict else 1)
+        sizes = [int(counts_dict.get(i, 0)) for i in range(total_parts)]
+        if not sizes:
+            sizes = [0]
+    except Exception:
+        sizes = df.rdd.glom().map(len).collect()
+        if not sizes:
+            sizes = [0]
+
     return PartitionStats(
         partition_count=len(sizes),
         sizes=sizes,
         max_size=max(sizes),
         min_size=min(sizes),
-        mean_size=statistics.fmean(sizes),
+        mean_size=statistics.fmean(sizes) if sizes else 0.0,
         std_size=statistics.pstdev(sizes) if len(sizes) > 1 else 0.0,
     )
 
@@ -77,7 +89,7 @@ def shuffle_partition_stats(df: DataFrame, key_cols: str | list[str], num_partit
         keyed = df.repartition(num_partitions, key_cols)
     else:
         keyed = df.repartition(num_partitions, *key_cols)
-    return partition_stats(keyed)
+    return partition_stats(keyed, num_partitions=num_partitions)
 
 
 def _spark_ui_base_url(spark: SparkSession) -> str | None:
